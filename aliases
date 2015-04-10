@@ -28,6 +28,12 @@ alias m="migrate"
 alias rk="rake"
 alias s="rspec"
 
+alias fucknode="rm -rf node_modules && rm -rf bower_components"
+alias nodeplz="npm install && bower install"
+alias gap="git add -p"
+alias gp="git push"
+alias gcm="git commit -m"
+
 # Pretty print the path
 alias path='echo $PATH | tr -s ":" "\n"'
 

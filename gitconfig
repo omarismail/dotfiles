@@ -31,3 +31,6 @@
   prune = true
 [include]
   path = ~/.gitconfig.local
+[user]
+	name = Omar Ismail
+	email = oismail91@gmail.com

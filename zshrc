@@ -59,6 +59,11 @@ bindkey -s "^T" "^[Isudo ^[A" # "t" for "toughguy"
 
 # aliases
 [[ -f ~/.aliases ]] && source ~/.aliases
+alias cdw='cd ~/work'
+alias cdp='cd ~/personal'
+alias bers='bundle exec rails server'
+alias berc='bundle exec rails console'
+alias gits='git status'
 
 # extra files in ~/.zsh/configs/pre , ~/.zsh/configs , and ~/.zsh/configs/post
 # these are loaded first, second, and third, respectively.
@@ -98,3 +103,9 @@ _load_settings "$HOME/.zsh/configs"
 
 # Local config
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
+
+
+### Added by the Heroku Toolbelt
+export PATH="/usr/local/heroku/bin:$PATH"
+
+export PATH="$HOME/.bin:$PATH"

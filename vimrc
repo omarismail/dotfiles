@@ -1,9 +1,9 @@
 " Use Vim settings, rather then Vi settings. This setting must be as early as
 " possible, as it has side effects.
 set nocompatible
-
+execute pathogen#infect()
 " Leader
-let mapleader = " "
+let mapleader = ","
 
 set backspace=2   " Backspace deletes like most programs in insert mode
 set nobackup
@@ -15,6 +15,21 @@ set showcmd       " display incomplete commands
 set incsearch     " do incremental searching
 set laststatus=2  " Always display the status line
 set autowrite     " Automatically :write before running commands
+set ignorecase
+set smartcase
+set gdefault
+set incsearch
+set showmatch
+set hlsearch
+map <leader>h :nohlsearch<cR>
+nmap ; :
+set mouse=a
+map <leader>vf :VtrSendFile<cR>
+map <leader>vap :VtrAttachToPane<cR>
+map <leader>vl :VtrSendLinesToRunner<cR>
+map <leader>vfr :VtrFocusRunner<cR>
+
+
 
 " Switch syntax highlighting on, when the terminal has colors
 " Also switch on highlighting the last used search pattern.
@@ -77,19 +92,39 @@ if executable('ag')
   " ag is fast enough that CtrlP doesn't need to cache
   let g:ctrlp_use_caching = 0
 endif
+nnoremap f :Ag
 
 " Color scheme
-colorscheme github
+colorscheme benokai
 highlight NonText guibg=#060606
 highlight Folded  guibg=#0A0A0A guifg=#9090D0
 
 " Make it obvious where 80 characters is
 set textwidth=80
-set colorcolumn=+1
+" set colorcolumn=+1
 
 " Numbers
 set number
 set numberwidth=5
+
+" Copy to clipboard
+set clipboard+=unnamed
+
+function! NumberToggle()
+  if(&relativenumber == 1)
+    set number
+  else
+    set relativenumber
+  endif
+endfunc
+
+nnoremap <C-n> :call NumberToggle()<cr>
+" tab navigation like firefox
+map <C-S-tab> :tabprevious<CR>
+map <C-tab>   :tabnext<CR>
+map <C-t>     :tabnew<CR>
+map <C-Insert> :tabnew<CR>
+map <C-Delete> :tabclose<CR>
 
 " Tab completion
 " will insert tab at beginning of line,
@@ -115,11 +150,6 @@ map <Leader>ct :!ctags -R .<CR>
 " Switch between the last two files
 nnoremap <leader><leader> <c-^>
 
-" Get off my lawn
-nnoremap <Left> :echoe "Use h"<CR>
-nnoremap <Right> :echoe "Use l"<CR>
-nnoremap <Up> :echoe "Use k"<CR>
-nnoremap <Down> :echoe "Use j"<CR>
 
 " vim-rspec mappings
 nnoremap <Leader>t :call RunCurrentSpecFile()<CR>
@@ -128,6 +158,12 @@ nnoremap <Leader>l :call RunLastSpec()<CR>
 
 " Run commands that require an interactive shell
 nnoremap <Leader>r :RunInInteractiveShell<space>
+let g:rspec_command = "call VtrSendCommand('rspec {spec}')"
+
+" Paste from clipboard
+nnoremap * "*
+vnoremap * "*
+set pastetoggle=<F2>
 
 " Treat <li> and <p> tags like the block tags they are
 let g:html_indent_tags = 'li\|p'
@@ -145,6 +181,7 @@ nnoremap <C-l> <C-w>l
 " configure syntastic syntax checking to check on open as well as save
 let g:syntastic_check_on_open=1
 let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-"]
+let g:syntastic_javascript_jslint_args = "--white --nomen --regexp --browser --devel --windows --sloppy --vars"
 
 " Set spellfile to location that is guaranteed to exist, can be symlinked to
 " Dropbox or kept in Git and managed outside of thoughtbot/dotfiles using rcm.
