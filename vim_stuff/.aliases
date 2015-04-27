@@ -33,6 +33,8 @@ alias nodeplz="npm install && bower install"
 alias gap="git add -p"
 alias gp="git push"
 alias gcm="git commit -m"
+alias bers="bundle exec rails s"
+alias berc="bundle exec rails c"
 
 # Pretty print the path
 alias path='echo $PATH | tr -s ":" "\n"'
