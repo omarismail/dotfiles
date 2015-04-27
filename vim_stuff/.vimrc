@@ -92,6 +92,7 @@ if executable('ag')
   " ag is fast enough that CtrlP doesn't need to cache
   let g:ctrlp_use_caching = 0
 endif
+let g:ctrlp_working_path_mode = 0
 nnoremap f :Ag
 
 " Color scheme
